@@ -14,11 +14,11 @@ exports[`render expense list item 1`] = `
   </NavLink>
   <p>
     Amount: 
-    109500
+    $1,095.00
   </p>
   <p>
     Created At: 
-    -345600000
+    Dec 28th, 1969
   </p>
 </div>
 `;
