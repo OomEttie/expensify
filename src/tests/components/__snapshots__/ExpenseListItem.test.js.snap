@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render expense list item 1`] = `
+<div>
+  <NavLink
+    activeClassName="active"
+    aria-current="page"
+    exact={true}
+    to="/edit/1"
+  >
+    <h2>
+      Rent
+    </h2>
+  </NavLink>
+  <p>
+    Amount: 
+    109500
+  </p>
+  <p>
+    Created At: 
+    -345600000
+  </p>
+</div>
+`;

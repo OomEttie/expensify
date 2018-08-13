@@ -1,0 +1,38 @@
+.header {
+  background: darkblue;
+  color: white;
+  margin-bottom: $xl-size;
+  padding: $m-size 0;
+}
+
+// BEM block element modifier structure
+.header__title {
+  font-size: $l-size;
+  margin: 0;
+}
+
+.header__subtitle {
+  color: lightblue;
+  font-size: $m-size;
+  font-weight: 500;
+  margin: 0;
+}
+
+// @media(min-width: $desktop-breakpoint) {
+//   .header {
+//     margin-bottom: $s-size;
+//   }
+  
+//   // // BEM block element modifier structure
+//   // .header__title {
+//   //   font-size: $l-size;
+//   //   margin: 0;
+//   // }
+  
+//   // .header__subtitle {
+//   //   color: $off-white;
+//   //   font-size: $m-size;
+//   //   font-weight: 500;
+//   //   margin: 0;
+//   // }
+// }
