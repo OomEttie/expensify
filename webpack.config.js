@@ -46,7 +46,7 @@ module.exports = (env, arg) => {
       ]
     },
     plugins: [CSSExtract],
-    devtool: isProduction ? 'source-map' : 'inline-source-map',
+    devtool: isProduction ? 'source-map' : 'inline-source-map', //production
     devServer: {
       contentBase: path.join(__dirname, 'public'),
       historyApiFallback: true,
@@ -57,7 +57,7 @@ module.exports = (env, arg) => {
 
 // devtool: isProduction ? 'source-map' : 'inline-source-map', //production
 // devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map', //development
-    
+
 // plugins: [CSSExtract],
 
 // {

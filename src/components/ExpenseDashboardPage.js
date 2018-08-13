@@ -6,17 +6,23 @@ import ExpenseListFilters from './ExpenseListFilters';
 import { getVisibleExpenses } from '../selectors/expenses';
 import { getTotalExpensesAmount } from '../selectors/expenses-total';
 
-export const ExpenseDashboardPage = props => (
-  <div>
-    <h3>This is my expense Dashboard component!</h3>
-    <h3>
-      Viewing {props.expenses.length} expenses totalling
-      {getTotalExpensesAmount(props.expenses)}
-    </h3>
-    <ExpenseListFilters />
-    <ExpenseList />
-  </div>
-);
+export class ExpenseDashboardPage extends React.Component {
+  render() {
+    return (
+      <div>
+        <h3>This is my expense Dashboard component!</h3>
+        {this.props.expenses.length > 0 && (
+          <h3>
+            Viewing {this.props.expenses.length} expenses totalling
+            {getTotalExpensesAmount(this.props.expenses)}
+          </h3>
+        )}
+        <ExpenseListFilters />
+        <ExpenseList />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => {
   return {
@@ -24,9 +30,7 @@ const mapStateToProps = state => {
   };
 };
 
-export const ConnectedExpenseDashboardPage = connect(mapStateToProps)(
-  ExpenseDashboardPage
-);
+export default connect(mapStateToProps)(ExpenseDashboardPage);
 
 // export default ExpenseDashboardPage;
 // export default ConnectedExpenseDashboardPage;
