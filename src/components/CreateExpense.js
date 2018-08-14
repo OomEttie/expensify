@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { addExpense } from '../actions/expenses';
+import { startAddExpense } from '../actions/expenses';
+
 // onSubmit = expense => {
 //   console.log('onSubmit-', expense);
 // };
@@ -26,7 +27,7 @@ export class CreateExpense extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     createExpense: expense => {
-      dispatch(addExpense(expense));
+      dispatch(startAddExpense(expense));
     }
   };
 };

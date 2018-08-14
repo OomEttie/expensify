@@ -1,6 +1,3 @@
-// https://budget-app.mead.io/dashboard
-// http://indecision.mead.io/
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -15,7 +12,24 @@ import 'normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 
+import './firebase/firebase';
+
 const store = configureStore();
+
+const jsx = (
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
+);
+
+ReactDOM.render(jsx, document.getElementById('appRoot'));
+
+// https://budget-app.mead.io/dashboard
+// http://indecision.mead.io/
+
+// const template = React.createElement('p', {}, 'testing 123');
+// ReactDOM.render(template, document.getElementById('appRoot'));
+
 // console.log(store.getState());
 
 // store.dispatch(
@@ -39,14 +53,3 @@ const store = configureStore();
 // console.log(visibleExpenses);
 
 // console.log('testing debug mapping');
-
-const jsx = (
-  <Provider store={store}>
-    <AppRouter />
-  </Provider>
-);
-
-ReactDOM.render(jsx, document.getElementById('appRoot'));
-
-// const template = React.createElement('p', {}, 'testing 123');
-// ReactDOM.render(template, document.getElementById('appRoot'));
