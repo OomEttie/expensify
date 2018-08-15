@@ -7,7 +7,8 @@ import {
   addExpense,
   removeExpense,
   editExpense,
-  setExpenses
+  setExpenses,
+  startSetExpenses
 } from '../../actions/expenses';
 
 import expenses from '../fixtures/expenses';
@@ -90,5 +91,17 @@ test('should setup setExpenses action object with data', () => {
   expect(action).toEqual({
     type: 'SET_EXPENSES',
     expenses
+  });
+});
+
+test('should add expenses to database and store startSetExpenses', done => {
+  const store = mockStore({});
+  store.dispatch(startSetExpenses()).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: 'SET_EXPENSES',
+      expenses
+    });
+    done();
   });
 });

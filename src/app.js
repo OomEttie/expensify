@@ -4,9 +4,10 @@ import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
 
-import { addExpense, editExpense, removeExpense } from './actions/expenses';
-import { setTextFilter } from './actions/filters';
-import { getVisibleExpenses } from './selectors/expenses';
+// import { addExpense, editExpense, removeExpense } from './actions/expenses';
+import { startSetExpenses } from './actions/expenses';
+// import { setTextFilter } from './actions/filters';
+// import { getVisibleExpenses } from './selectors/expenses';
 
 import 'normalize.css';
 import './styles/styles.scss';
@@ -22,7 +23,11 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById('appRoot'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('appRoot'));
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('appRoot'));
+});
 
 // https://budget-app.mead.io/dashboard
 // http://indecision.mead.io/
