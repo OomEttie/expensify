@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`shoud render header correctly 1`] = `
+exports[`should render header correctly 1`] = `
 <header>
   <h1>
     Expensify
@@ -9,7 +9,7 @@ exports[`shoud render header correctly 1`] = `
     activeClassName="isActive"
     aria-current="page"
     exact={true}
-    to="/"
+    to="/dashboard"
   >
     Dashboard
   </NavLink>
@@ -31,6 +31,10 @@ exports[`shoud render header correctly 1`] = `
   >
     Help
   </NavLink>
-  |
+  <button
+    onClick={[MockFunction]}
+  >
+    Log Out
+  </button>
 </header>
 `;

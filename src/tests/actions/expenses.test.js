@@ -17,6 +17,7 @@ import expenses from '../fixtures/expenses';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
+const dbPath = 'users/UID_unknown/expenses';
 
 beforeEach(done => {
   const expensesData = {};
@@ -25,7 +26,7 @@ beforeEach(done => {
   });
 
   database
-    .ref('expenses')
+    .ref(dbPath)
     .set(expensesData)
     .then(() => done());
 });
@@ -44,16 +45,20 @@ test('should setup remove expense action', () => {
 test('should setup the startRemoveExpense action', done => {
   const store = mockStore({});
   const id = expenses[0].id;
+  // const result = getMockState().auth.uid;
+  // console.log('getMockState', result.toString());
 
   store
-    .dispatch(startRemoveExpense({ id: id }))
+    .dispatch(
+      startRemoveExpense({ id: id })
+    )
     .then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
         type: 'REMOVE_EXPENSE',
         id: id
       });
-      return database.ref(`expenses/${id}`).once('value');
+      return database.ref(`${dbPath}/${id}`).once('value');
     })
     .then(snapshot => {
       expect(snapshot.val()).toEqual(null);
@@ -95,7 +100,7 @@ test('should setup the startEditExpense action', done => {
         updates
       });
 
-      return database.ref(`expenses/${id}`).once('value');
+      return database.ref(`${dbPath}/${id}`).once('value');
     })
     .then(snapshot => {
       expect(snapshot.val()).toEqual(updates);
@@ -136,7 +141,7 @@ test('should add expense to database and store', done => {
         }
       });
 
-      return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+      return database.ref(`${dbPath}/${actions[0].expense.id}`).once('value');
     })
     .then(snapshot => {
       const snapshotVal = snapshot.val();

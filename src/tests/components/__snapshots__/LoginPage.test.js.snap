@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render LoginPage component 1`] = `
+<div>
+  <p>
+    This is the Login Page
+  </p>
+  <button
+    onClick={[Function]}
+  >
+    Login
+  </button>
+</div>
+`;

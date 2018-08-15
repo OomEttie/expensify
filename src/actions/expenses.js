@@ -1,6 +1,11 @@
 const uuidV4 = require('uuid/v4');
 import database from '../firebase/firebase';
 
+//get the correct expenses db ref path
+let expensesRef = uid => {
+  return 'users/' + uid + '/expenses';
+};
+
 //
 // ADD_EXPENSES
 //
@@ -10,7 +15,7 @@ export const addExpense = expense => ({
 });
 
 export const startAddExpense = (expenseData = {}) => {
-  return dispatch => {
+  return (dispatch, getState) => {
     const {
       description = '',
       note = '',
@@ -20,8 +25,12 @@ export const startAddExpense = (expenseData = {}) => {
 
     const expense = { description, note, amount, createdAt };
 
+    const dbPath = expensesRef(
+      getState().auth ? getState().auth.uid : 'UID_unknown'
+    );
+    
     return database
-      .ref('expenses')
+      .ref(dbPath)
       .push(expense)
       .then(ref => {
         dispatch(
@@ -43,9 +52,12 @@ export const removeExpense = ({ id } = {}) => ({
 });
 
 export const startRemoveExpense = ({ id }) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const dbPath = expensesRef(
+      getState().auth ? getState().auth.uid : 'UID_unknown'
+    );
     return database
-      .ref(`expenses/${id}`)
+      .ref(`${dbPath}/${id}`)
       .remove()
       .then(data => {
         dispatch(removeExpense({ id }));
@@ -63,9 +75,12 @@ export const editExpense = (id, updates) => ({
 });
 
 export const startEditExpense = (id, updates) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const dbPath = expensesRef(
+      getState().auth ? getState().auth.uid : 'UID_unknown'
+    );
     return database
-      .ref(`expenses/${id}`)
+      .ref(`${dbPath}/${id}`)
       .update({
         ...updates
       })
@@ -83,9 +98,12 @@ export const setExpenses = expenses => ({
 });
 
 export const startSetExpenses = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const dbPath = expensesRef(
+      getState().auth ? getState().auth.uid : 'UID_unknown'
+    );
     return database
-      .ref('expenses')
+      .ref(dbPath)
       .once('value')
       .then(snapshot => {
         const expenses = [];

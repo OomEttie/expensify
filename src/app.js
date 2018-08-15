@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import AppRouter from './routers/AppRouter';
+import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
-
-// import { addExpense, editExpense, removeExpense } from './actions/expenses';
-import { startSetExpenses } from './actions/expenses';
-// import { setTextFilter } from './actions/filters';
-// import { getVisibleExpenses } from './selectors/expenses';
 
 import 'normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
-
 import './firebase/firebase';
+
+import { startSetExpenses } from './actions/expenses';
+import { login, logOut } from './actions/auth';
+// import { addExpense, editExpense, removeExpense } from './actions/expenses';
+// import { setTextFilter } from './actions/filters';
+// import { getVisibleExpenses } from './selectors/expenses';
+
+import { firebase } from './firebase/firebase';
 
 const store = configureStore();
 
@@ -23,10 +25,30 @@ const jsx = (
   </Provider>
 );
 
+let hasRendered = false;
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(jsx, document.getElementById('appRoot'));
+    hasRendered = true;
+  }
+};
+
 ReactDOM.render(<p>Loading...</p>, document.getElementById('appRoot'));
 
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(jsx, document.getElementById('appRoot'));
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    store.dispatch(login(user.uid));
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp();
+      if (history.location.pathname == '/') {
+        history.push('/dashboard');
+      }
+    });
+  } else {
+    store.dispatch(logOut());
+    renderApp();
+    history.push('/');
+  }
 });
 
 // https://budget-app.mead.io/dashboard
