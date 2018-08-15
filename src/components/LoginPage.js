@@ -10,9 +10,12 @@ export class LoginPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>This is the Login Page</p>
-        <button onClick={this.onClick}>Login</button>
+      <div className="box-layout">
+        <div className="box-layout__box">
+          <h1 className="box-layout__title">Expensify APP</h1>
+          <p>Get your expenses under control</p>
+          <button className="button" onClick={this.onClick}>Login with Google</button>
+        </div>
       </div>
     );
   }

@@ -1,0 +1,25 @@
+.button {
+  background-color: $blue;
+  border: none;
+  color: white;
+  display: inline-block;
+  font-weight: 300;
+  font-size: $fs-large;
+  line-height: 1;
+  padding: $s-size;
+  text-decoration: none;
+  width: 15rem;
+  text-align: center;
+}
+
+.button__link {
+  background-color: transparent;
+  border: none;
+  color: $off-white;
+  font-weight: 300;
+}
+
+.button__warning {
+  @extend .button;
+  background-color: $warning;
+}

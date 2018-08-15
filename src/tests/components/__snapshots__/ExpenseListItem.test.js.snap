@@ -1,24 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`render expense list item 1`] = `
-<div>
-  <NavLink
-    activeClassName="active"
-    aria-current="page"
-    exact={true}
-    to="/edit/1"
-  >
-    <h2>
+<Link
+  className="list-item"
+  exact={true}
+  replace={false}
+  to="/edit/1"
+>
+  <div>
+    <h3
+      className="list-item__title"
+    >
       Rent
-    </h2>
-  </NavLink>
-  <p>
-    Amount: 
+    </h3>
+    <span
+      className="list-item__subtitle"
+    >
+      Dec 28th, 1969
+    </span>
+  </div>
+  <h3
+    className="list-item__data"
+  >
     $1,095.00
-  </p>
-  <p>
-    Created At: 
-    Dec 28th, 1969
-  </p>
-</div>
+  </h3>
+</Link>
 `;

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -5,9 +9,11 @@ html {
 // rem
 
 body {
+  color: $dark-grey;
   background: white;
   font-family: Helvetica, Arial, sans-serif;
   font-size: $m-size;
+  line-height: 1;
 }
 
 button {
