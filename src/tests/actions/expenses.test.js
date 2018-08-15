@@ -9,7 +9,8 @@ import {
   editExpense,
   setExpenses,
   startSetExpenses,
-  startRemoveExpense
+  startRemoveExpense,
+  startEditExpense
 } from '../../actions/expenses';
 
 import expenses from '../fixtures/expenses';
@@ -73,6 +74,33 @@ test('shoudl setup the edit expense action', () => {
       note: 'testing note prop'
     }
   });
+});
+
+test('should setup the startEditExpense action', done => {
+  const store = mockStore({});
+  const id = expenses[0].id;
+
+  const updates = {
+    ...expenses[0],
+    description: 'Gum updated',
+    note: '1 Gum note updated'
+  };
+  store
+    .dispatch(startEditExpense(id, updates))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: 'EDIT_EXPENSE',
+        id: id,
+        updates
+      });
+
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then(snapshot => {
+      expect(snapshot.val()).toEqual(updates);
+      done();
+    });
 });
 
 //
